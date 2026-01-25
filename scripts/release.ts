@@ -3,7 +3,7 @@
 import { Command as CliCommand, Options } from "@effect/cli"
 import { Command } from "@effect/platform"
 import { BunContext, BunRuntime } from "@effect/platform-bun"
-import { Console, Effect, Option, pipe } from "effect"
+import { Effect, pipe } from "effect"
 
 const dryRun = pipe(
   Options.boolean("dry-run"),
@@ -26,14 +26,7 @@ const release = CliCommand.make(
     ).pipe(
       Command.string,
       Effect.map((output) => output.trim()),
-      Effect.catchAll(() => Effect.succeed("")),
     )
-
-    if (currentTag === "") {
-      return yield* Effect.dieMessage("No tag found on HEAD")
-    }
-
-    yield* Effect.logInfo(`Current tag: ${currentTag}`)
 
     // 2. Get previous tag
     const prevTag = yield* Command.make(
@@ -44,47 +37,27 @@ const release = CliCommand.make(
       `${currentTag}^`,
     ).pipe(
       Command.string,
-      Effect.map((s) => {
-        const trimmed = s.trim()
-        return trimmed === "" ? Option.none() : Option.some(trimmed)
-      }),
-      Effect.catchAll(() => Effect.succeed(Option.none())),
-    )
-
-    yield* Effect.logInfo(
-      `Previous tag: ${Option.getOrElse(prevTag, () => "none")}`,
+      Effect.map((output) => output.trim()),
     )
 
     // 3. Get commits
-    const range = Option.match(prevTag, {
-      onNone: () => currentTag,
-      onSome: (prev) => `${prev}..${currentTag}`,
-    })
-
+    const range = prevTag ? `${prevTag}..${currentTag}` : currentTag
     const notes = yield* Command.make(
       "git",
       "log",
       range,
-      "--pretty=format:- %s (@%an)",
+      "--pretty=format:%s",
       "--no-merges",
-    ).pipe(
-      Command.string,
-      Effect.map((s) => s.trim() || "Initial release"),
-      Effect.catchAll((err) =>
-        Effect.dieMessage(`Failed to get git log: ${JSON.stringify(err)}`),
-      ),
-    )
+    ).pipe(Command.string)
 
-    yield* Effect.logInfo(`Found ${notes.split("\n").length} commits`)
+    yield* Effect.log(`Current tag: ${currentTag}`)
+    yield* Effect.log(`Previous tag: ${prevTag}`)
+    yield* Effect.log(`Range: ${range}`)
+    yield* Effect.log(`Found ${notes.split("\n").length} commits`)
 
     // 4. Output or Release
     if (dryRun) {
-      yield* Console.log(`\n=== DRY RUN ===`)
-      yield* Console.log(`Tag: ${currentTag}`)
-      yield* Console.log(
-        `Previous tag: ${Option.getOrElse(prevTag, () => "none")}`,
-      )
-      yield* Console.log(`\nRelease notes:\n${notes}`)
+      yield* Effect.log(`Release notes: ${notes}`)
     } else {
       yield* Command.make(
         "gh",
@@ -95,13 +68,8 @@ const release = CliCommand.make(
         currentTag,
         "--notes",
         notes,
-      ).pipe(
-        Command.string,
-        Effect.catchAll((err) =>
-          Effect.dieMessage(`Failed to create release: ${JSON.stringify(err)}`),
-        ),
-      )
-      yield* Effect.logInfo(`Release created: ${currentTag}`)
+      ).pipe(Command.string)
+      yield* Effect.log(`Release created: ${currentTag}`)
     }
   }),
 )
