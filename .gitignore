@@ -1,5 +1,4 @@
 node_modules/
+.opencode/
+.context/
 dist/
-
-# eslint
-.eslintcache
