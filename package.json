@@ -19,14 +19,15 @@
   "exports": {
     ".": {
       "types": "./dist/main.d.ts",
-      "default": "./dist/main.js"
+      "default": "./dist/main.mjs"
     }
   },
   "bin": {
-    "pkg-placeholder": "./dist/cli.js"
+    "pkg-placeholder": "./dist/cli.mjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "tsdown",
