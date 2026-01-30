@@ -6,13 +6,33 @@
     "oxc",
     "promise",
     // "react",
-    // "react-perf",
     "unicorn",
     "typescript"
   ],
 
   "rules": {
-    // React
+    "class-methods-use-this": "error",
+    "default-case": "error",
+    "default-case-last": "error",
+    "default-param-last": "error",
+    "max-params": "error",
+    "no-bitwise": "error",
+    "no-duplicate-imports": "error",
+    "no-param-reassign": "error",
+    "no-regex-spaces": "error",
+    "yoda": "error",
+
+    "import/no-commonjs": "error",
+    "import/no-cycle": "error",
+
+    "oxc/bad-bitwise-operator": "error",
+    "oxc/no-accumulating-spread": "error",
+    "oxc/no-const-enum": "error",
+    "oxc/no-map-spread": "error",
+
+    "promise/catch-or-return": ["error", { "allowFinally": true }],
+    "promise/spec-only": "error",
+
     // "react/exhaustive-deps": "error",
     // "react/forward-ref-uses-ref": "error",
     // "react/jsx-no-undef": "error",
@@ -20,36 +40,9 @@
     // "react/no-children-prop": "off",
     // "react/no-danger-with-children": "error",
     // "react/void-dom-elements-no-children": "error",
-    //
-    // "react-perf/jsx-no-new-array-as-prop": "error",
-    // "react-perf/jsx-no-new-object-as-prop": "error",
-    //
     // "react/button-has-type": "error",
 
-    // Perf
-    "oxc/no-accumulating-spread": "error",
-    "oxc/no-map-spread": "error",
-
-    "unicorn/prefer-array-find": "error",
-    "unicorn/prefer-array-flat-map": "error",
-    "unicorn/prefer-set-has": "error",
-
-    // Restriction
-    "class-methods-use-this": "error",
-    "default-case": "error",
-    "no-bitwise": "error",
-    "no-param-reassign": "error",
-    "no-regex-spaces": "error",
-
-    "import/no-commonjs": "error",
-    "import/no-cycle": "error",
-
-    "oxc/bad-bitwise-operator": "error",
-    "oxc/no-const-enum": "error",
-
-    "promise/catch-or-return": ["error", { "allowFinally": true }],
-    "promise/spec-only": "error",
-
+    "typescript/no-deprecated": "error",
     "typescript/no-dynamic-delete": "error",
     "typescript/no-explicit-any": "error",
     "typescript/no-namespace": "error",
@@ -60,17 +53,11 @@
     "unicorn/no-document-cookie": "error",
     "unicorn/no-length-as-slice-end": "error",
     "unicorn/no-magic-array-flat-depth": "error",
+    "unicorn/prefer-array-find": "error",
+    "unicorn/prefer-array-flat-map": "error",
     "unicorn/prefer-modern-math-apis": "error",
     "unicorn/prefer-node-protocol": "error",
     "unicorn/prefer-number-properties": "error",
-
-    // Style
-    "default-case-last": "error",
-    "default-param-last": "error",
-    // Disable for codebase using Effect
-    // "func-names": "error",
-    "max-params": "error",
-    "no-duplicate-imports": "error",
-    "yoda": "error"
+    "unicorn/prefer-set-has": "error"
   }
 }
