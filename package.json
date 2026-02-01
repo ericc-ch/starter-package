@@ -33,7 +33,7 @@
     "build": "tsdown",
     "format": "prettier --write .",
     "lint": "oxlint --type-aware",
-    "prepare": "simple-git-hooks && effect-language-service setup && konteks sync",
+    "prepare": "simple-git-hooks && effect-language-service patch && konteks sync",
     "prepack": "bun run build",
     "release": "bumpp && npm publish",
     "start": "bun src/cli.ts",
