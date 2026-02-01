@@ -15,6 +15,7 @@
 
     "noEmit": true,
     "declaration": true,
+    // "declarationMap": true,
     // Enable this for libraries
     // "isolatedDeclarations": true,
 
@@ -35,8 +36,8 @@
 
     "plugins": [
       {
-        "name": "@effect/language-service"
-      }
-    ]
-  }
+        "name": "@effect/language-service",
+      },
+    ],
+  },
 }
