@@ -1,12 +1,19 @@
-# Package Manager
+Use pnpm as package manager.
 
-Uses pnpm.
+Run `pnpm run check` after completing a task.
 
-# Post-Work Checklist
+Node.js can run `.ts` (see `package.json`) files directly (no need for ts-node or tsx or compilation etc).
 
-Run `pnpm run check` after completing any work.
+# References Directory
 
-# Effect v4 Documentation
+The `.references/` directory contains shallow clones of important external repositories.
+Never make any changes in this directory, it is ignored by git and meant as reference only.
 
-Clone https://github.com/Effect-TS/effect-smol to /tmp (shallow), then read from there.
-Deep dive: open linked files in migration/ and ai-docs/src/, read \*.ts examples, check migration guides.
+Prefer exploring and reading this directory over searching for documentation. Think of it as the source of truth.
+
+Available references:
+
+- opencode - OpenCode
+- opentui - OpenTUI
+- dbus-native - Homebridge's fork of dbus-native
+- effect-smol - Effect v4
