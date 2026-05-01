@@ -13,7 +13,4 @@ Prefer exploring and reading this directory over searching for documentation. Th
 
 Available references:
 
-- opencode - OpenCode
-- opentui - OpenTUI
-- dbus-native - Homebridge's fork of dbus-native
 - effect-smol - Effect v4
