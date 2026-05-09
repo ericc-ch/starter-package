@@ -1,8 +1,9 @@
 Use pnpm as package manager.
-
 Run `pnpm run check` after completing a task.
 
-Node.js can run `.ts` (see `package.json`) files directly (no need for ts-node or tsx or compilation etc).
+Node.js can run `.ts` (see `package.json`) files directly (no need for ts-node or tsx).
+
+Never explicitly write types unless needed. Prefer type inference.
 
 # References Directory
 
