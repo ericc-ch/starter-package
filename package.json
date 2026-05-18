@@ -62,8 +62,7 @@
     "vitest": "^4.1.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm run format",
-    "pre-push": "pnpm run check"
+    "pre-commit": "pnpm run check"
   },
   "packageManager": "pnpm@11.1.2"
 }
